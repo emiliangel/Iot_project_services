@@ -45,6 +45,8 @@ services:
    
     links:
       - mongo
+    extra_hosts:
+      - "localhost:192.168.1.100" #aqui colocar la ip de red del host
 
     environment: 
       
@@ -71,7 +73,7 @@ services:
       EMQX_AUTH__MONGO__PASSWORD: "devpassword"
       EMQX_AUTH__MONGO__AUTH_SOURCE: admin
 
-      EMQX_AUTH__MONGO__DATABASE: "iotgl"
+      EMQX_AUTH__MONGO__DATABASE: "iotgl2"
       EMQX_AUTH__MONGO__AUTH_QUERY__COLLECTION: "emqxauthrules"
 
       EMQX_AUTH__MONGO__SUPER_QUERY__COLLECTION: "emqxauthrules"
