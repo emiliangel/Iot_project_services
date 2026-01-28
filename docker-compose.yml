@@ -1,6 +1,7 @@
 version: "3.8"
 #
-#volumes:
+volumes:
+  mongodata:
 #  vol-emqx-data:
 #    name: foo-emqx-data
 #  vol-emqx-etc:
@@ -19,7 +20,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: "devuser"
       MONGO_INITDB_ROOT_PASSWORD: "devpassword"
     volumes:
-      - ./mongodata:/data/db
+      - mongodata:/data/db   # Al realizar una modificación en docker, al no utilizar docker desktop, se instaló docker solo en wsl y no se realiza un bind mount, por lo que se accesa desde wsl2 directamente, sin pasar por windows (ojo que al final aunque sea directamente a wsl2, se almacena en windows)
     ports:
       - 27017:27017
 
@@ -45,8 +46,9 @@ services:
    
     links:
       - mongo
-    extra_hosts:
-      - "localhost:192.168.1.100" #aqui colocar la ip de red del host
+    #extra_hosts:
+    #  - "localhost:192.168.1.100" #aqui colocar la ip de red del host. PERO OJO, PARECE QUE ASÍ NO FUNCIONA
+    # SE DEJA VACIO ESTE CAMPO Y SE COLOCA http://host.docker.internal:3001 EN EL RECURSO DE EMQX, PUEDE SER PORQUE ESTA EN WSL2, ENTONCES PARA QUE CONECTE CON WINDOWS
 
     environment: 
       
