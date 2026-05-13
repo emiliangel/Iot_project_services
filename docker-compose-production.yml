@@ -1,5 +1,5 @@
 version: "3.8"
-#
+
 volumes:
   mongodata:
   vol-emqx-data:
@@ -10,6 +10,22 @@ volumes:
     name: foo-emqx-log
 
 services:
+
+  node:
+    container_name: node
+    image: "node:18.17.0"
+    restart: always
+    working_dir: /home/node/app
+    volumes:
+      - ./mycode/index.js:/home/node/app/index.js
+    ports:
+      - 3000:3000
+      - 3001:3001
+      - 80:3002
+    links:
+      - emqx
+      - mongo
+    command: sh -c "node index.js"
 
   mongo:
     container_name: mongo
