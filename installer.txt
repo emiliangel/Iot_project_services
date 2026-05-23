@@ -11,4 +11,11 @@ docker compose version
 sudo git clone https://github.com/emiliangel/Iot_project_services.git
 cd Iot_project_services
 
+
+
 //WARNING .ENV
+
+sudo docker compose -f docker-compose-production.yml up
+
+sudo git clone https://github.com/emiliangel/Iot_project.git
+sudo mv Iot_project/ app
